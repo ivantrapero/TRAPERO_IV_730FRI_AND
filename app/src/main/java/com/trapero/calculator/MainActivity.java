@@ -6,8 +6,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             }
             String buttonText = button.getText().toString();
             if (buttonText.equals(".") && current.contains(".")) {
-                return; // Prevent multiple dots
+                return;
             }
             current += buttonText;
             display.setText(current);
@@ -115,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 if (b != 0) {
                     return a / b;
                 } else {
-                    display.setText("Error"); // Display error on division by zero
+                    display.setText("Error");
                     return 0;
                 }
             default:

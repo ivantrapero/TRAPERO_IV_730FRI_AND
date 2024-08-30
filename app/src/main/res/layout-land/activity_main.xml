@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- RelativeLayout to hold the EditText and LinearLayout -->
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="253dp"
@@ -19,7 +18,6 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp">
 
-        <!-- EditText for display -->
         <EditText
             android:id="@+id/display"
             android:layout_width="match_parent"
@@ -33,7 +31,6 @@
 
     </RelativeLayout>
 
-    <!-- GridLayout for calculator buttons -->
     <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="434dp"
@@ -145,7 +142,6 @@
             android:textColor="@color/black" />
     </GridLayout>
 
-    <!-- LinearLayout for additional buttons or controls -->
     <LinearLayout
         android:id="@+id/buttonContainer"
         android:layout_width="180dp"
