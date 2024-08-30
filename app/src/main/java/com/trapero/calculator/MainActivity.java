@@ -6,13 +6,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import java.text.DecimalFormat;
-
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText display;
-    private String current, previous, operator;
-    private boolean isOperatorClicked;
+    private String current = "";
+    private String previous = "";
+    private String operator = "";
+    private boolean isOperatorClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,48 +23,43 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         display = findViewById(R.id.display);
-        current = "";
-        previous = "";
-        operator = "";
-        isOperatorClicked = false;
 
         setNumberButtonListeners();
         setOperatorButtonListeners();
     }
 
     private void setNumberButtonListeners() {
-        View.OnClickListener listener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Button button = (Button) view;
-                if (isOperatorClicked) {
-                    current = "";
-                    isOperatorClicked = false;
-                }
-                current += button.getText().toString();
-                display.setText(current);
+        View.OnClickListener numberListener = view -> {
+            Button button = (Button) view;
+            if (isOperatorClicked) {
+                current = "";
+                isOperatorClicked = false;
             }
+            String buttonText = button.getText().toString();
+            if (buttonText.equals(".") && current.contains(".")) {
+                return; // Prevent multiple dots
+            }
+            current += buttonText;
+            display.setText(current);
         };
 
-        findViewById(R.id.button0).setOnClickListener(listener);
-        findViewById(R.id.button1).setOnClickListener(listener);
-        findViewById(R.id.button2).setOnClickListener(listener);
-        findViewById(R.id.button3).setOnClickListener(listener);
-        findViewById(R.id.button4).setOnClickListener(listener);
-        findViewById(R.id.button5).setOnClickListener(listener);
-        findViewById(R.id.button6).setOnClickListener(listener);
-        findViewById(R.id.button7).setOnClickListener(listener);
-        findViewById(R.id.button8).setOnClickListener(listener);
-        findViewById(R.id.button9).setOnClickListener(listener);
-        findViewById(R.id.buttonDot).setOnClickListener(listener);
+        int[] numberButtonIds = {
+                R.id.button0, R.id.button1, R.id.button2, R.id.button3,
+                R.id.button4, R.id.button5, R.id.button6, R.id.button7,
+                R.id.button8, R.id.button9, R.id.buttonDot
+        };
+
+        for (int id : numberButtonIds) {
+            findViewById(id).setOnClickListener(numberListener);
+        }
     }
 
     private void setOperatorButtonListeners() {
-        View.OnClickListener listener = new View.OnClickListener() {
+        View.OnClickListener operatorListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Button button = (Button) view;
-                if (!current.equals("")) {
+                if (!current.isEmpty()) {
                     previous = current;
                     operator = button.getText().toString();
                     isOperatorClicked = true;
@@ -69,25 +67,32 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        findViewById(R.id.buttonAdd).setOnClickListener(listener);
-        findViewById(R.id.buttonSubtract).setOnClickListener(listener);
-        findViewById(R.id.buttonMultiply).setOnClickListener(listener);
-        findViewById(R.id.buttonDivide).setOnClickListener(listener);
+        int[] operatorButtonIds = {
+                R.id.buttonAdd, R.id.buttonSubtract, R.id.buttonMultiply, R.id.buttonDivide
+        };
+
+        for (int id : operatorButtonIds) {
+            findViewById(id).setOnClickListener(operatorListener);
+        }
 
         findViewById(R.id.buttonEqual).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!previous.equals("") && !current.equals("") && !operator.equals("")) {
-                    double result = calculate(Double.parseDouble(previous), Double.parseDouble(current), operator);
-                    display.setText(formatResult(result));
-                    current = formatResult(result);
-                    previous = "";
-                    operator = "";
+                if (!previous.isEmpty() && !current.isEmpty() && !operator.isEmpty()) {
+                    try {
+                        double result = calculate(Double.parseDouble(previous), Double.parseDouble(current), operator);
+                        display.setText(formatResult(result));
+                        current = formatResult(result);
+                        previous = "";
+                        operator = "";
+                    } catch (NumberFormatException e) {
+                        display.setText("Error");
+                    }
                 }
             }
         });
 
-        findViewById(R.id.buttonClear).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.eraseButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 current = "";
@@ -110,12 +115,14 @@ public class MainActivity extends AppCompatActivity {
                 if (b != 0) {
                     return a / b;
                 } else {
-                    return 0; // Avoid division by zero
+                    display.setText("Error"); // Display error on division by zero
+                    return 0;
                 }
             default:
                 return 0;
         }
     }
+
     private String formatResult(double result) {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         return decimalFormat.format(result);
