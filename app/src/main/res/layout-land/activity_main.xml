@@ -1,0 +1,141 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/display"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#000000"
+        android:gravity="end"
+        android:inputType="none"
+        android:padding="16dp"
+        android:textColor="#FFFFFF"
+        android:textSize="32sp" />
+
+    <GridLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:columnCount="4"
+        android:rowCount="5"
+        android:layout_marginLeft="16dp"
+        android:layout_gravity="center_vertical">
+
+        <!-- Row 1 -->
+        <Button
+            android:text="7"
+            android:textColor="@color/black"
+            android:id="@+id/button7"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="8"
+            android:textColor="@color/black"
+            android:id="@+id/button8"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="9"
+            android:textColor="@color/black"
+            android:id="@+id/button9"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="/"
+            android:textColor="@color/black"
+            android:id="@+id/buttonDivide"
+            style="@style/CalculatorButton" />
+
+        <!-- Row 2 -->
+        <Button
+            android:text="4"
+            android:textColor="@color/black"
+            android:id="@+id/button4"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="5"
+            android:textColor="@color/black"
+            android:id="@+id/button5"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="6"
+            android:textColor="@color/black"
+            android:id="@+id/button6"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="*"
+            android:textColor="@color/black"
+            android:id="@+id/buttonMultiply"
+            style="@style/CalculatorButton" />
+
+        <!-- Row 3 -->
+        <Button
+            android:text="1"
+            android:textColor="@color/black"
+            android:id="@+id/button1"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="2"
+            android:textColor="@color/black"
+            android:id="@+id/button2"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="3"
+            android:textColor="@color/black"
+            android:id="@+id/button3"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="-"
+            android:textColor="@color/black"
+            android:id="@+id/buttonSubtract"
+            style="@style/CalculatorButton" />
+
+        <!-- Row 4 -->
+        <Button
+            android:text="0"
+            android:textColor="@color/black"
+            android:id="@+id/button0"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="."
+            android:textColor="@color/black"
+            android:id="@+id/buttonDot"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="="
+            android:textColor="@color/black"
+            android:id="@+id/buttonEqual"
+            style="@style/CalculatorButton" />
+
+        <Button
+            android:text="+"
+            android:textColor="@color/black"
+            android:id="@+id/buttonAdd"
+            style="@style/CalculatorButton" />
+
+        <!-- Row 5 -->
+        <Button
+            android:text="C"
+            android:id="@+id/buttonClear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill"
+            android:layout_columnSpan="4"
+            android:background="#FF4081"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+    </GridLayout>
+</LinearLayout>
