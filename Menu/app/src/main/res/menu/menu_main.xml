@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_go_to_fragment"
+        android:title="Go to Fragment" />
+    <item
+        android:id="@+id/action_show_dialog"
+        android:title="Show Dialog" />
+    <item
+        android:id="@+id/action_sub_menu"
+        android:title="Sub Menu" />
+    <item
+        android:id="@+id/action_exit"
+        android:title="Exit" />
+</menu>
